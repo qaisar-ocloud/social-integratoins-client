@@ -13,11 +13,11 @@ function PostForm() {
       scheduledAfter > 0
         ? {
             text,
-            platforms: user.access_tokens,
+            platforms: user?.access_tokens,
             published: false,
             scheduledAfter,
           }
-        : { text, platforms: user.access_tokens, published: true };
+        : { text, platforms: user?.access_tokens, published: true };
 
     dispatch(createPost(postData));
     setText("");

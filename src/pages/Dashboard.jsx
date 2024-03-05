@@ -48,8 +48,8 @@ function Dashboard() {
 
     if (success === 'true' && platform) {
       const user = JSON.parse(localStorage.getItem('user')) || {};
-      if (!user.access_tokens.includes(platform)) {
-        user.access_tokens = [...user.access_tokens, platform];
+      if (!user?.access_tokens.includes(platform)) {
+        user.access_tokens = [...user?.access_tokens, platform];
         localStorage.setItem('user', JSON.stringify(user));
       }
 
@@ -78,7 +78,7 @@ function Dashboard() {
         <h1>Welcome - {user ? user?.name?.toUpperCase() : "Guest"}</h1>
         {
           allowedPlatforms.map((item, index) => (
-            !user.access_tokens.includes(item.name.toLowerCase())&& <button className="btn  btn-block" key={index} type="submit" onClick={() => handleOauthLogin(item.name.toLowerCase())} >
+            !user?.access_tokens.includes(item.name.toLowerCase())&& <button className="btn  btn-block" key={index} type="submit" onClick={() => handleOauthLogin(item.name.toLowerCase())} >
             Login with -  {item.name}
             </button>
           ))
@@ -87,7 +87,7 @@ function Dashboard() {
       <PostForm />
       <section className="content">
         <div style={{ display: "flex", flexDirection: 'row', justifyContent:'space-evenly' }}>
-        {user?.access_tokens.length>0?user?.access_tokens.map((item,i) => (
+        {user?.access_tokens.length>0 ? user?.access_tokens.map((item,i) => (
           
           <button type="submit" className="btn" key={i}>
             <TiTickOutline />
