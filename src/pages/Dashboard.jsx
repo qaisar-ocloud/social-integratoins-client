@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts, reset } from "../features/posts/post-slice.js";
-import PostItem from "../components/post-item.js";
+import {  reset } from "../features/posts/post-slice.js";
 import PostForm from "../components/post-form.js";
 import Spinner from "../components/Spinner";
 import { TiTickOutline } from "react-icons/ti";
@@ -15,10 +14,9 @@ function Dashboard() {
 
   const { user } = useSelector((state) => state.auth);
   
-  const { isLoading, posts, isError, message } = useSelector(
+  const { isLoading, isError, message } = useSelector(
     (state) => state.posts
     );
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();

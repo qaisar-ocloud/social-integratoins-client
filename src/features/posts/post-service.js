@@ -2,7 +2,6 @@ import axios from "../../config/axios";
 const API_URL = "post";
 
 const createPost = async (postData, token) => {
-  console.log("🚀 ~ createPost ~ postData:", postData);
   const createPostsConfig = {
     headers: {
       authorization: `Bearer ${token}`,

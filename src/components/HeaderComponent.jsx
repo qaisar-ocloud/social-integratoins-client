@@ -17,7 +17,7 @@ function HeaderComponent() {
     <header className="header">
         <>
           <div className="logo">
-            <Link to="/">Goal Setter</Link>
+            <Link to="/">One Place Post</Link>
           </div>
       {user ? (
           <ul>
