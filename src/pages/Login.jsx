@@ -99,9 +99,6 @@ function Login() {
               onChange={handlePasswordChange}
             />
           </div>
-          <div className="form-group">
-            <Link to="/forgotPassword"> Forgot Password ?</Link>
-          </div>
 
           <button className="btn btn-block" type="submit">
             Submit
