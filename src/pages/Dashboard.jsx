@@ -61,7 +61,7 @@ function Dashboard() {
   useEffect(() => {
     if (isError) {
       toast.error(message);
-      dispatch(reset());
+      (reset());
     }
     if (!user) {
       navigate("/login");
