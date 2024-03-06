@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {  reset } from "../features/posts/post-slice.js";
-import PostForm from "../components/post-form.js";
+import PostForm from "../components/post-form.jsx";
 import Spinner from "../components/Spinner";
 import { TiTickOutline } from "react-icons/ti";
 import { toast } from "react-toastify";
@@ -14,7 +14,7 @@ function Dashboard() {
 
   const { user } = useSelector((state) => state.auth);
   
-  const { isLoading, isError, message } = useSelector(
+  const { isLoading, isError, isSuccess,message } = useSelector(
     (state) => state.posts
     );
   const dispatch = useDispatch();
@@ -61,12 +61,17 @@ function Dashboard() {
   useEffect(() => {
     if (isError) {
       toast.error(message);
-      dispatch(reset());
+      (reset());
     }
     if (!user) {
       navigate("/login");
     } 
-  }, [user, isError]);
+    if (isSuccess) {
+      toast.success(message)
+      dispatch(reset());
+    }
+    
+  }, [user, isSuccess,isError]);
 
   if (isLoading) {
     return <Spinner />;

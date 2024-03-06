@@ -48,7 +48,7 @@ const postSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload?.linkedInResponse.message;
-        state.post = [...state.post, action.payload?.linkedInResponse.data];
+        state.post = [...state.post, action.payload];
       })
       .addCase(createPost.rejected, (state, action) => {
         state.isLoading = false;

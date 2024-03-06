@@ -19,21 +19,6 @@ const login = async (userData) => {
   return response?.data;
 };
 
-const forgotPassword = async ({ email }) => {
-  const response = await axios.post(API_URL + "forgot", email);
-
-  return response.data;
-};
-
-const resetPassword = async ({ password }) => {
-  const response = await axios.post(
-    API_URL + "resetPassword/" + password.id,
-    password
-  );
-
-  return response.data;
-};
-
 export const logout = () => {
   localStorage.removeItem("user");
 };
@@ -41,7 +26,5 @@ const authService = {
   register,
   login,
   logout,
-  forgotPassword,
-  resetPassword,
 };
 export default authService;
