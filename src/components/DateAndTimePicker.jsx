@@ -6,12 +6,14 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import 'dayjs/locale/en'; // Import the desired locale if not already imported
+import 'dayjs/locale/en'; 
+import { toast } from "react-toastify";
+
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const TimeAndDatePicker = ({ setScheduleValue }) => {
+const TimeAndDatePicker = ({ setScheduleValueHandler }) => {
   const [scheduledAt, setscheduledAt] = useState(null);
 
   const CustomDateTimePicker = styled(DateTimePicker)({
@@ -23,13 +25,24 @@ const TimeAndDatePicker = ({ setScheduleValue }) => {
   const maxDateTime = currentTime.add(30, 'day');
 
   const handleChange = (value) => {
-    setscheduledAt(value);
-    const utcTime = dayjs(value);
-    const localTimeOffset = dayjs().utcOffset();
-    const localTime = utcTime.add(localTimeOffset, 'minute');
-    const localTimeString = localTime.format();
-    const unixTimestamp = dayjs(localTimeString).unix();
-    return  setScheduleValue(unixTimestamp)
+    const selectedDateTime = dayjs(value);
+
+    if (selectedDateTime.isAfter(minDateTime)) {
+      setscheduledAt(value);
+      const unixTimestamp = selectedDateTime.unix();
+      setScheduleValueHandler(unixTimestamp);
+      return setScheduleValueHandler(unixTimestamp)
+    }else{
+      toast.error("Wrong Date Picked, Retry", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (
@@ -38,7 +51,7 @@ const TimeAndDatePicker = ({ setScheduleValue }) => {
         label="Select Date and Time"
         minDateTime={minDateTime}
         maxDateTime={maxDateTime}
-        timezone={dayjs.tz.guess()} // Set the timezone to the user's local timezone
+        timezone={dayjs.tz.guess()}
         value={scheduledAt}
         onAccept={(newValue) => handleChange(newValue)}
       />

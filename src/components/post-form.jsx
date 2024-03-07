@@ -60,7 +60,7 @@ function PostForm() {
           labelPlacement="start"
           onClick={()=>setSchedule(!isScheduled)}
           />{
-            isScheduled&& <TimeAndDatePicker setScheduleValue={(selectedValue)=>handleSchedule(selectedValue)} />
+            isScheduled  && <TimeAndDatePicker setScheduleValueHandler={(selectedValue)=>handleSchedule(selectedValue)} />
           }
           </div>
           <button type="submit" className="btn btn-block">
